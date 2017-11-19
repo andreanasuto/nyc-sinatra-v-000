@@ -2,23 +2,23 @@
 <br>
 <form action="/figures/<%= @figure.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <p>Edit the name:</p> <br>
-  <input type="text" name="figure[name]">
+  <p for="figure_name">Edit the name:</p> <br>
+  <input type="text" name="figure[name]" id="figure_name">
   <p>Select a title:</p>
   <% Title.all.each { |title| %>
   <input type="checkbox" name="figure[title_ids][]" value="<%= title.id %>"> <%= title.name %> </input>
   <% } %>
   <br>
   <p> or create new title:</p>
-  <input type="text" name="title[name]">
+  <input type="text" name="title[name]" id="new_title">
   <br></br>
   <p>Select a landmark:</p>
   <% Landmark.all.each { |landmark| %>
-  <input type="checkbox" name="figure[landmark_ids][]" value="<%= landmark.id %>" <%='checked' if @figure.landmarks.include?(landmark) %>> 
+  <input type="checkbox" name="figure[landmark_ids][]" value="<%= landmark.id %>" <%='checked' if @figure.landmarks.include?(landmark) %>>
    <%= landmark.name %>  </input>
   <% } %>
   <p>or create a new landmark:</p>
-  <input type="text" name="landmark[name]">
+  <input type="text" name="landmark[name]" id="new_landmark">
   <br></br>
   <input type="submit" value="Edit Figure">
 </form>

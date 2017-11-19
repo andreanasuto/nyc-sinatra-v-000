@@ -9,10 +9,7 @@ class LandmarksController < ApplicationController
   end
 
   post '/landmarks' do
-    @landmark = Landmark.create(name: params["landmark"]["name"], year_completed: params["landmark"]["year_completed"])
-    #@figure.landmarks << Landmark.find_or_create_by(name: params["landmark"]["name"])
-    #@figure.titles << Title.find_or_create_by(name: params["title"]["name"])
-    #@figure.save
+    @landmark = Landmark.create(params["landmark"])
     redirect "/landmarks/#{@landmark.id}"
   end
 
@@ -27,11 +24,9 @@ class LandmarksController < ApplicationController
   end
 
   patch '/landmarks/:id' do
-    @figure = Figure.find_by_id(params[:id])
-    @figure.update(name: params[:figure][:name])
-    @figure.landmarks << Landmark.find_or_create_by(name: params["landmark"]["name"])
-    @figure.titles << Title.find_or_create_by(name: params["title"]["name"])
-    @figure.save
-    redirect :"/landmarks/#{@figure.id}"
+    @landmark = Landmark.find_by_id(params[:id])
+    @landmark.update(name: params[:landmark][:name], year_completed: params[:landmark][:year_completed])
+    @landmark.save
+    redirect :"/landmarks/#{@landmark.id}"
   end
 end
